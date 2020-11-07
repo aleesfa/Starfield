@@ -1,20 +1,67 @@
-//your code here
+Particle[] part;
+//Particle bob;
 void setup()
 {
-	//your code here
+  size(400, 400);
+  part = new Particle[100];
+  for(int i = 0; i < part.length; i++)
+  {
+    part[i] = new Particle();
+  }
+  part[0] = new OddballParticle();
+  //bob = new Particle();
 }
 void draw()
 {
-	//your code here
+  background(0);
+  for(int i = 0; i < part.length; i++)
+  {
+    part[i].show();
+    part[i].move();
+  }
+  //bob.show();
+  //bob.move();
 }
 class Particle
 {
-	//your code here
+  double x, y, speed, angle;
+  int col;
+  public Particle()
+  {
+    x = y = 200;
+    angle = Math.random() * 2 * Math.PI;
+    speed = Math.random() *8;
+    col = color((int)(Math.random() * 256), (int)(Math.random() * 256), (int)(Math.random() * 256));
+  }
+  public void move()
+  {
+    x += Math.cos(angle)*speed;
+    y += Math.sin(angle) * speed;
+  }
+  public void show()
+  {
+    fill(col);
+    ellipse((int)x, (int)y, 5, 5);
+  }
 }
 
-class OddballParticle //inherits from Particle
+class OddballParticle extends Particle//inherits from Particle
 {
-	//your code here
+  public OddballParticle()
+  {
+    x = y = 10;
+    angle = Math.random() * 2 * Math.PI;
+    speed = Math.random() *4;
+    col = color(1443, 1324, 133, 1245);
+  }
+  public void move()
+  {
+    x += Math.cos(angle)+ speed;
+    y += Math.sin(angle) + speed;
+  }
+  public void show()
+  {
+    fill(col);
+    ellipse((int)x, (int)y, 9, 15);
+  }
 }
-
-
